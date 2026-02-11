@@ -1,0 +1,293 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-family: 'Dancing Script', cursive;
+    /* overflow-x: hidden;  Keep horizontal scroll hidden */
+}
+
+/* Heart animation container context */
+.heart {
+    position: fixed;
+    top: -10vh;
+    background-color: #ff4d6d;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    animation: fall linear forwards;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff4d6d;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(45deg) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(45deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* --- New Styles --- */
+
+.full-screen-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.hero-section {
+    z-index: 100;
+}
+
+#main-title {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #e91e63;
+    font-size: 5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+#main-title.scrolled {
+    top: 20px;
+    transform: translate(-50%, 0);
+    font-size: 3rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 0;
+    backdrop-filter: blur(2px);
+    pointer-events: auto;
+}
+
+.message-wrapper {
+    z-index: 10;
+}
+
+.message-section {
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.message-section h2 {
+    color: #e91e63;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.message-section p {
+    font-size: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Final Card Styles */
+.card-section {
+    z-index: 10;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: rgba(255, 240, 245, 0.5);
+}
+
+.final-card-container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.final-card {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    /* Adjust based on your Canva design aspect ratio */
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.final-card:hover {
+    transform: scale(1.02);
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #ff4d6d;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    border: 2px solid white;
+}
+
+.download-btn:hover {
+    background-color: #e91e63;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+}
+
+.grid-section {
+    padding: 50px 20px;
+    min-height: 100vh;
+    z-index: 10;
+    position: relative;
+    background-color: transparent;
+}
+
+.photo-grid {
+    column-count: 3;
+    /* Number of columns */
+    column-gap: 20px;
+    /* Space between columns */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    break-inside: avoid;
+    /* Prevent items from splitting across columns */
+    margin-bottom: 20px;
+    /* Space between items vertically */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Animation Initial State */
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Apple-style ease-out */
+    background-color: #ffe0e6;
+    overflow: hidden;
+    /* Ensure width is 100% of the column */
+    width: 100%;
+}
+
+.photo-item:hover {
+    transform: scale(1.02);
+}
+
+.photo-item img {
+    width: 100%;
+    /* Remove fixed height to let image keep aspect ratio */
+    height: auto;
+    display: block;
+    /* Removes bottom space/gap typical with inline images */
+}
+
+.photo-item.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Responsive Columns */
+@media (max-width: 900px) {
+    .photo-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-grid {
+        column-count: 1;
+    }
+}
+
+/* Valentine Section Styles */
+.valentine-section {
+    background-color: #fff0f5;
+    flex-direction: column;
+    text-align: center;
+}
+
+#valentine-question h2,
+#success-msg h2 {
+    font-size: 3.5rem;
+    color: #e91e63;
+    margin-bottom: 30px;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+    height: 100px;
+    /* Give room for movement */
+    align-items: center;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Dancing Script', cursive;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#yes-btn {
+    background-color: #4CAF50;
+    /* Green for go! */
+    color: white;
+}
+
+#yes-btn:hover {
+    transform: scale(1.1);
+    background-color: #45a049;
+}
+
+#no-btn {
+    background-color: #ff4d6d;
+    color: white;
+    position: relative;
+    /* Needed for absolute positioning movement */
+}
+
+/* Utility to hide elements */
+.hidden {
+    display: none !important;
+}
